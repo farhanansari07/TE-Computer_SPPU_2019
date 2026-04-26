@@ -1,0 +1,51 @@
+id,age,income,occupation,years of experience
+1,64,35397,developer,10
+2,54,32943,teacher,3
+3,43,21947,professor,9
+4,21,37092,engineer,5
+5,64,35935,accountant,10
+6,52,38933,mechanic,1
+7,37,22040,electrician,8
+8,37,36656,software engineer,5
+9,43,32220,tester,13
+10,26,36691,designer,3
+11,32,32283,developer,0
+12,40,27773,teacher,1
+13,43,30195,professor,5
+14,36,23926,engineer,0
+15,59,39369,accountant,10
+16,53,28486,mechanic,10
+17,65,37904,electrician,20
+18,20,32601,software engineer,19
+19,62,20494,tester,1
+20,58,35202,designer,9
+21,50,23974,developer,11
+22,39,21239,teacher,20
+23,34,23712,professor,18
+24,62,27435,engineer,13
+25,26,29457,accountant,19
+26,27,33222,mechanic,8
+27,33,29918,electrician,7
+28,43,37929,software engineer,17
+29,46,21063,tester,12
+30,37,28859,designer,6
+31,38,28751,developer,14
+32,47,25256,teacher,14
+33,51,30667,professor,2
+34,24,37021,engineer,7
+35,58,26798,accountant,9
+36,64,20465,mechanic,14
+37,53,37197,electrician,11
+38,26,35320,software engineer,7
+39,47,21012,tester,15
+40,45,26067,designer,20
+41,36,38519,developer,15
+42,40,22165,teacher,1
+43,45,36675,professor,2
+44,30,26865,engineer,11
+45,44,34992,accountant,12
+46,20,21214,mechanic,11
+47,54,26332,electrician,3
+48,57,20762,software engineer,1
+49,46,25015,tester,4
+50,26,23520,designer,15
