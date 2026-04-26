@@ -1,0 +1,75 @@
+# Step 1: Import Required Libraries
+
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+
+
+# Step 2: Load Dataset
+
+df = pd.read_csv("titanic.csv")
+# Display first 5 rows
+df.head()
+
+
+# Step 3: Check dimensions of dataset
+
+print("Shape of dataset:", df.shape)
+print("Number of rows:", df.shape[0])
+print("Number of columns:", df.shape[1])
+
+# Step 4: Basic Information
+
+df.info()
+
+
+# Step 5: Check Missing Values
+
+print(df.isnull().sum())
+
+# Step 6: Statistical Summary
+
+df.describe()
+
+
+# Step 7: Data Types of Variables
+
+print(df.dtypes)
+
+
+# Step 8: Fill Missing Values
+
+# Fill missing Age with mean
+df['Age'].fillna(df['Age'].mean(), inplace=True)
+
+# Fill missing Embarked with mode
+df['Embarked'].fillna(df['Embarked'].mode()[0], inplace=True)
+
+# Fill missing Fare with mean if needed
+df['Fare'].fillna(df['Fare'].mean(), inplace=True)
+
+print(df.isnull().sum())
+
+
+
+# Step 9: Convert Data Types if Required
+
+df['Age'] = df['Age'].astype(int)
+
+print(df.dtypes)
+
+
+# Step 10: Convert Categorical Variables into Quantitative Variables
+
+label_encoder = LabelEncoder()
+
+df['Sex'] = label_encoder.fit_transform(df['Sex'])
+df['Embarked'] = label_encoder.fit_transform(df['Embarked'])
+
+df.head()
+
+
+# Final Dataset Check
+
+df.info()
+df.head()

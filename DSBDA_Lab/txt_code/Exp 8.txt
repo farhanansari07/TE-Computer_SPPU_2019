@@ -1,0 +1,65 @@
+# Step 1: Import Required Libraries
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Step 2: Load Titanic Dataset
+
+df = sns.load_dataset('titanic')
+
+df.head()
+
+
+
+# Step 3: Basic Information
+
+print("Shape of Dataset:", df.shape)
+print(df.info())
+print(df.describe())
+
+
+
+# Step 4: Check Missing Values
+
+print(df.isnull().sum())
+
+
+
+# Step 5: Histogram for Age
+
+plt.figure(figsize=(8,5))
+
+plt.hist(df['age'].dropna(), bins=10)
+
+plt.title("Histogram of Age")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+
+plt.show()
+
+
+
+# Step 6: Histogram for Fare
+
+plt.figure(figsize=(8,5))
+
+plt.hist(df['fare'].dropna(), bins=10)
+
+plt.title("Histogram of Fare")
+plt.xlabel("Fare")
+plt.ylabel("Frequency")
+
+plt.show()
+
+
+
+
+# Step 7: Histogram using Seaborn
+
+sns.histplot(df['age'].dropna(), kde=True)
+
+plt.title("Age Distribution with KDE")
+plt.show()
+

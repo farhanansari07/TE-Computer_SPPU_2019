@@ -1,0 +1,88 @@
+Dataset:
+https://www.kaggle.com/datasets/uciml/iris/data?select=Iris.csv
+
+
+EXP 3 HAS 2 PARTS, PART 2 IS PERFORMED BELOW. PART 1 TAKE FROM FARHAN
+
+# Step 1: Import Required Libraries
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+
+# Step 2: Load Iris Dataset
+
+df = sns.load_dataset('iris')
+
+df.head()
+
+
+# Step 3: Check Basic Information
+
+print("Shape of Dataset:", df.shape)
+print("\nColumn Names:")
+print(df.columns)
+
+print("\nData Types:")
+print(df.dtypes)
+
+
+# Step 4: Display Statistical Summary
+
+df.describe()
+
+# Step 5: Calculate Mean
+
+print("Mean Values:\n")
+print(df.mean(numeric_only=True))
+
+
+# Step 6: Calculate Median
+
+print("Median Values:\n")
+print(df.median(numeric_only=True))
+
+
+# Step 7: Calculate Mode
+
+print("Mode Values:\n")
+print(df.mode())
+
+
+# Step 8: Calculate Variance
+
+print("Variance:\n")
+print(df.var(numeric_only=True))
+
+
+
+# Step 9: Calculate Standard Deviation
+
+print("Standard Deviation:\n")
+print(df.std(numeric_only=True))
+
+
+# Step 10: Calculate Percentiles
+
+print("25th Percentile:\n")
+print(df.quantile(0.25, numeric_only=True))
+
+print("\n50th Percentile:\n")
+print(df.quantile(0.50, numeric_only=True))
+
+print("\n75th Percentile:\n")
+print(df.quantile(0.75, numeric_only=True))
+
+
+
+# Step 11: Species-wise Summary Statistics
+
+grouped = df.groupby('species').describe()
+
+grouped
+
+
+# Step 12: Mean of Each Species
+
+print(df.groupby('species').mean(numeric_only=True))

@@ -1,0 +1,73 @@
+# Step 1: Import Required Libraries
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Step 2: Load Titanic Dataset
+
+df = sns.load_dataset('titanic')
+
+df.head()
+
+
+# Step 3: Basic Information
+
+print("Shape of Dataset:", df.shape)
+print(df.info())
+print(df.describe())
+
+# Step 4: Check Missing Values
+
+print(df.isnull().sum())
+
+
+# Step 5: Boxplot of Age
+
+plt.figure(figsize=(8,5))
+
+sns.boxplot(x=df['age'])
+
+plt.title("Boxplot of Age")
+plt.show()
+
+
+# Step 6: Boxplot of Age with respect to Gender
+
+plt.figure(figsize=(8,5))
+
+sns.boxplot(x='sex', y='age', data=df)
+
+plt.title("Age Distribution by Gender")
+plt.show()
+
+
+
+# Step 7: Boxplot of Age with respect to Survival
+
+plt.figure(figsize=(8,5))
+
+sns.boxplot(x='survived', y='age', data=df)
+
+plt.title("Age Distribution by Survival")
+plt.show()
+
+
+
+
+# Step 8: Boxplot of Fare
+
+plt.figure(figsize=(8,5))
+
+sns.boxplot(x=df['fare'])
+
+plt.title("Boxplot of Fare")
+plt.show()
+
+
+
+
+
+
+

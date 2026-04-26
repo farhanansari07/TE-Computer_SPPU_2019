@@ -1,0 +1,101 @@
+# Step 1: Import Required Libraries
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Step 2: Create Academic Performance Dataset
+
+data = {
+    'Student_ID': [1,2,3,4,5,6,7,8,9,10],
+    'Gender': ['Male','Female','Female','Male','Female','Male','Male','Female','Male','Female'],
+    'Study_Hours': [2, 5, 8, 1, 12, 15, 3, 6, 50, 4],   # 50 is outlier
+    'Attendance': [75, 88, 92, 60, 95, np.nan, 80, 85, 90, 78],
+    'Internal_Marks': [20, 35, 40, 18, 45, 48, 25, 38, 42, np.nan],
+    'External_Marks': [45, 60, 70, 40, 80, 85, 50, 65, 75, 55]
+}
+
+df = pd.DataFrame(data)
+
+df
+
+
+
+# Step 3: Check Missing Values
+
+print(df.isnull().sum())
+
+
+
+# Step 4: Handle Missing Values
+
+# Fill missing Attendance with mean
+df['Attendance'].fillna(df['Attendance'].mean(), inplace=True)
+
+# Fill missing Internal Marks with mean
+df['Internal_Marks'].fillna(df['Internal_Marks'].mean(), inplace=True)
+
+print(df.isnull().sum())
+
+
+# Step 5: Basic Statistics
+
+df.describe()
+
+
+
+# Step 6: Detect Outliers using Boxplot
+
+sns.boxplot(df['Study_Hours'])
+plt.title("Boxplot for Study Hours")
+plt.show()
+
+
+# Step 7: Detect Outliers using IQR Method
+
+Q1 = df['Study_Hours'].quantile(0.25)
+Q3 = df['Study_Hours'].quantile(0.75)
+IQR = Q3 - Q1
+
+lower_limit = Q1 - 1.5 * IQR
+upper_limit = Q3 + 1.5 * IQR
+
+print("Lower Limit:", lower_limit)
+print("Upper Limit:", upper_limit)
+
+outliers = df[(df['Study_Hours'] < lower_limit) | (df['Study_Hours'] > upper_limit)]
+print(outliers)
+
+
+# Step 8: Handle Outliers using Capping
+
+df['Study_Hours'] = np.where(
+    df['Study_Hours'] > upper_limit,
+    upper_limit,
+    df['Study_Hours']
+)
+
+df
+
+
+# Step 9: Data Transformation (Normalization)
+
+df['Study_Hours_Normalized'] = (
+    (df['Study_Hours'] - df['Study_Hours'].min()) /
+    (df['Study_Hours'].max() - df['Study_Hours'].min())
+)
+
+df
+
+
+
+# Step 10: Label Encoding for Gender
+
+from sklearn.preprocessing import LabelEncoder
+
+le = LabelEncoder()
+df['Gender'] = le.fit_transform(df['Gender'])
+
+df

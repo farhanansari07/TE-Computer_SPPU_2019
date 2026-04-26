@@ -1,0 +1,91 @@
+dataset  : iris again ig 
+same as exp 3 
+
+# Step 1: Import Required Libraries
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, accuracy_score
+
+
+# Step 2: Load Iris Dataset
+
+df = sns.load_dataset('iris')
+
+df.head()
+
+
+
+# Step 3: Basic Information
+
+print("Shape of Dataset:", df.shape)
+print(df.info())
+print(df.describe())
+
+
+# Step 4: Define Features and Target Variable
+
+X = df.drop('species', axis=1)
+y = df['species']
+
+
+
+# Step 5: Split Dataset
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42
+)
+
+print("Training Shape:", X_train.shape)
+print("Testing Shape:", X_test.shape)
+
+
+
+
+# Step 6: Create Naive Bayes Model
+
+model = GaussianNB()
+
+model.fit(X_train, y_train)
+
+
+
+
+# Step 7: Predict Values
+
+y_pred = model.predict(X_test)
+
+print("Predicted Values:\n", y_pred[:10])
+
+
+
+
+# Step 8: Confusion Matrix
+
+cm = confusion_matrix(y_test, y_pred)
+
+print("Confusion Matrix:\n", cm)
+
+
+
+# Step 9: Accuracy Score
+
+accuracy = accuracy_score(y_test, y_pred)
+
+print("Accuracy of Model:", accuracy)
+
+
+
+# Step 10: Compare Actual vs Predicted
+
+result = pd.DataFrame({
+    'Actual': y_test,
+    'Predicted': y_pred
+})
+
+print(result.head(10))
+
