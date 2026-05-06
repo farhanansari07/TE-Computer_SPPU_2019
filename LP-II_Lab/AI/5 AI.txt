@@ -1,0 +1,144 @@
+📚 Theory (Short)
+
+A chatbot is a program that simulates conversation with users. It is used in customer support, websites, and apps to answer queries automatically.
+
+This practical uses a rule-based chatbot, which works on predefined conditions. It checks user input and gives responses based on keywords like “product”, “order”, or “return”. It does not learn from data but follows fixed rules.
+
+⚙️ Algorithm (Short)
+Start the program
+Display welcome message
+Accept user input
+Convert input to lowercase
+Check conditions:
+If greeting → show greeting message
+If product query → show product list
+If order → ask order ID and display status
+If return → show return policy
+If exit → stop program
+Else → show default message
+Repeat until user exits
+Stop
+📌 Conclusion (Short)
+
+The elementary chatbot was successfully developed using Python. It can handle basic customer queries like product information, order status, and return policy. This practical demonstrates how rule-based systems work in artificial intelligence for simple interactions.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+🔹 Basic Questions
+Q1: What is a chatbot?
+
+A chatbot is an AI-based program that simulates human conversation through text or voice to assist users.
+
+Q2: What type of chatbot have you implemented?
+
+A rule-based chatbot, which responds based on predefined conditions and keywords.
+
+Q3: What is Artificial Intelligence (AI)?
+
+AI is a field of computer science that enables machines to perform tasks that normally require human intelligence, such as learning, reasoning, and decision-making.
+
+Q4: How is your chatbot related to AI?
+
+It is a basic AI application that demonstrates decision-making using rules, which is a fundamental concept of AI.
+
+🔹 Conceptual AI Questions
+Q5: What is the difference between rule-based and AI-based chatbot?
+Rule-Based Chatbot	AI-Based Chatbot
+Uses predefined rules	Uses machine learning
+No learning ability	Learns from data
+Limited responses	Dynamic responses
+Q6: What is Natural Language Processing (NLP)?
+
+NLP is a branch of AI that helps computers understand, interpret, and respond to human language.
+
+Q7: Does your chatbot use NLP?
+
+No, it only uses simple keyword matching. It does not truly understand language.
+
+Q8: What are the limitations of your chatbot?
+Cannot understand complex sentences
+No learning capability
+Works only for predefined inputs
+Q9: How can you improve this chatbot?
+
+By adding NLP techniques or machine learning models so it can understand natural language and learn from interactions.
+
+🔹 Programming + Logic Questions
+Q10: Why did you use .lower() in your code?
+
+To make input case-insensitive, so “Hello” and “hello” are treated the same.
+
+Q11: What is the purpose of while True?
+
+It creates an infinite loop so the chatbot keeps running until the user exits.
+
+Q12: What is conditional statement?
+
+A statement (if-elif-else) used to make decisions based on conditions.
+
+Q13: How does your chatbot take decisions?
+
+It uses conditional statements to check user input and select the appropriate response.
+
+Q14: What happens if the user enters an unknown query?
+
+The chatbot gives a default response: “Sorry, I didn’t understand that.”
+
+🔹 Application-Based Questions
+Q15: Where are chatbots used?
+Customer support
+E-commerce websites
+Banking systems
+Healthcare assistance
+Q16: Give a real-world example of chatbot
+
+Customer support bots on shopping apps like Amazon or Flipkart.
+
+Q17: What is the advantage of chatbots?
+24/7 availability
+Fast responses
+Reduces human workload
+Q18: What are disadvantages?
+Limited understanding
+Cannot handle complex queries
+May give incorrect responses
+🔹 Advanced AI Questions (To Impress Examiner 😎)
+Q19: What is Machine Learning?
+
+Machine Learning is a subset of AI where systems learn from data and improve performance without explicit programming.
+
+Q20: Can your chatbot be converted into ML-based?
+
+Yes, by training it on conversation datasets using NLP and ML models.
+
+Q21: What is training data in chatbot?
+
+It is a dataset of conversations used to train the chatbot to understand and respond.
+
+Q22: What is intent in chatbot?
+
+Intent is the purpose of the user’s input (e.g., asking for product info or order status).
+
+Q23: What is entity in NLP?
+
+Entities are important pieces of information in a sentence, like order ID, name, date, etc.
+
+Q24: What is context in chatbot?
+
+Context refers to maintaining previous conversation information to give relevant responses.
+
+Q25: What is difference between AI and NLP?
+AI	NLP
+Broad field	Subfield of AI
+Focus on intelligence	Focus on language understanding
+🔥 Pro Tip for Viva
+
+If examiner asks:
+👉 “Is this really AI?”
+
+You can confidently say:
+
+“This is a basic rule-based AI system demonstrating decision-making. Advanced AI chatbots use NLP and machine learning for intelligent conversation.”
