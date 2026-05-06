@@ -1,49 +1,108 @@
+# Local storage for orders
+orders = {
+    "101": "Processing",
+    "102": "Shipped",
+    "103": "Delivered",
+    "104": "Cancelled"
+}
+
+# Product database
+products = {
+    "laptop": 55000,
+    "phone": 25000,
+    "headphones": 3000
+}
+
+
 def chatbot():
-    print("🤖 ChatBot: Hello! Welcome to our store. How can I help you?")
-    print("You can ask about: products, order, return, or say 'bye' to exit.\n")
+    print("🤖 ChatBot: Welcome to TechStore!")
+    print("Type 'help' to see available commands.\n")
 
     while True:
         user_input = input("You: ").lower()
 
         # Greeting
         if user_input in ["hi", "hello", "hey"]:
-            print("🤖 ChatBot: Hello! How can I assist you today?")
+            print(" ChatBot: Hello! How can I assist you today?")
+
+        # Help Menu
+        elif user_input == "help":
+            print("\n Available Options:")
+            print("- products  → View products")
+            print("- price     → Check product prices")
+            print("- order     → Track your order")
+            print("- return    → Return policy")
+            print("- bye       → Exit chatbot\n")
 
         # Product Inquiry
         elif "product" in user_input:
-            print("🤖 ChatBot: We sell laptops, phones, and headphones.")
+            print("\n Available Products:")
+            for item in products:
+                print("-", item.capitalize())
 
-        # Order Status
+        # Product Prices
+        elif "price" in user_input:
+            product_name = input("Enter product name: ").lower()
+
+            if product_name in products:
+                print(f" ChatBot: Price of {product_name} is ₹{products[product_name]}")
+            else:
+                print(" ChatBot: Product not found.")
+
+        # Order Tracking
         elif "order" in user_input:
-            order_id = input("🤖 ChatBot: Please enter your Order ID: ")
-            print(f"🤖 ChatBot: Order {order_id} is being processed and will arrive soon.")
+            order_id = input(" ChatBot: Enter your Order ID: ")
+
+            if order_id in orders:
+                print(f" ChatBot: Order {order_id} status → {orders[order_id]}")
+            else:
+                print(" ChatBot: Sorry, Order ID not found.")
 
         # Return Policy
         elif "return" in user_input:
-            print("🤖 ChatBot: You can return any product within 7 days of delivery.")
+            print(" ChatBot: Products can be returned within 7 days.")
 
-        # Exit Condition
+        # Exit
         elif user_input in ["bye", "exit"]:
-            print("🤖 ChatBot: Thank you! Have a great day 😊")
+            print(" ChatBot: Thank you for visiting TechStore ")
             break
 
         # Default Response
         else:
-            print("🤖 ChatBot: Sorry, I didn't understand that. Please try again.")
+            print(" ChatBot: Sorry, I didn't understand that.")
+
 
 # Run chatbot
 chatbot()
 
 
-# You: hi
-# Bot: Hello! How can I assist you today?
 
-# You: what products do you have?
-# Bot: We sell laptops, phones, and headphones.
+#  ChatBot: Welcome to TechStore!
+# Type 'help' to see available commands.
+
+# You: help
+
+#  Available Options:
+# - products
+# - price
+# - order
+# - return
+# - bye
+
+# You: products
+
+#  Available Products:
+# - Laptop
+# - Phone
+# - Headphones
+
+# You: price
+# Enter product name: laptop
+#  ChatBot: Price of laptop is ₹55000
 
 # You: order
-# Bot: Please enter your Order ID: 123
-# Bot: Order 123 is being processed and will arrive soon.
+# Enter your Order ID: 103
+#  ChatBot: Order 103 status → Delivered
 
 # You: bye
-# Bot: Thank you! Have a great day 😊
+#  ChatBot: Thank you for visiting TechStore 
