@@ -1,0 +1,470 @@
+Experiment:
+Case Study on Amazon EC2 Web Services and Web Hosting using AWS
+
+========================================================
+STEP 1: LOGIN TO AWS
+========================================================
+
+1. Open browser 
+2. Go to AWS Console
+3. Login to AWS account
+for OTP, open gmail in next tab.
+
+========================================================
+STEP 2: OPEN EC2 DASHBOARD
+========================================================
+
+1. Search "EC2" in AWS search bar
+2. Open EC2 Dashboard
+3. Click on "Launch Instance"
+
+========================================================
+STEP 3: CONFIGURE EC2 INSTANCE
+========================================================
+
+1. Instance Name:
+   Swaraj-Experiment1-EC2
+
+2. Select AMI:
+   Amazon Linux
+
+3. Instance Type:
+   t2.micro
+
+4. Key Pair:
+   Select existing key pair OR create new key pair
+
+5. Network Settings:
+   Allow:
+   [✓] SSH Traffic
+   [✓] HTTP Traffic
+
+6. Click "Launch Instance"
+
+========================================================
+STEP 4: VERIFY INSTANCE RUNNING
+========================================================
+
+1. Go to Instances
+2. Check:
+   - Instance State = Running
+   - Status Checks = Passed
+
+========================================================
+STEP 5: CONNECT TO INSTANCE
+========================================================
+
+1. Select Instance
+2. Click "Connect"
+3. Select "EC2 Instance Connect"
+4. Username:
+   ec2-user
+5. Click "Connect"
+
+Terminal will open successfully.
+
+========================================================
+STEP 6: INSTALL WEB SERVER
+========================================================
+
+Run the following commands one by one:
+
+sudo yum update -y
+
+sudo yum install httpd -y
+
+sudo systemctl start httpd
+
+sudo systemctl enable httpd
+
+========================================================
+STEP 7: CREATE WEBPAGE
+========================================================
+
+Run:
+
+cd /var/www/html
+
+sudo nano index.html
+
+Now type:
+<html>
+<head>
+<title>My EC2 Website</title>
+</head>
+<body>
+<h1>Hello from EC2 🎉</h1>
+<p>This is my cloud computing practical.</p>
+</body>
+</html>
+
+or 
+
+<h1>Welcome to Swaraj EC2 Server</h1>
+<p>This website is hosted using AWS EC2</p>
+
+Save File:
+CTRL + O
+Press Enter
+CTRL + X
+
+========================================================
+STEP 8: ACCESS WEBSITE
+========================================================
+
+1. Go back to EC2 Dashboard
+2. Copy Public IPv4 Address
+3. Open browser
+4. Type:
+
+http://<public-ip>
+
+Example:
+http://3.110.xxx.xxx
+
+Website will display successfully.
+
+========================================================
+STEP 9: TERMINATE INSTANCE
+========================================================
+
+IMPORTANT:
+Terminate instance after practical to avoid charges.
+
+Steps:
+1. Select Instance
+2. Click "Instance State"
+3. Click "Terminate Instance"
+4. Confirm Termination
+
+========================================================
+OBSERVATIONS
+========================================================
+
+1. EC2 instance launched successfully
+2. Public IP assigned automatically
+3. Web server installed successfully
+4. Webpage hosted on AWS EC2
+5. Website accessed using browser
+6. Instance terminated successfully
+
+========================================================
+ADVANTAGES OF AWS EC2
+========================================================
+
+1. Scalable and flexible
+2. Cost-effective
+3. Easy deployment
+4. High availability
+5. Secure environment
+
+========================================================
+LIMITATIONS
+========================================================
+
+1. Internet connection required
+2. Misconfiguration can create security risks
+3. Charges apply if instance is not terminated
+
+========================================================
+CONCLUSION
+========================================================
+
+In this experiment, we successfully launched an Amazon EC2 instance, installed and configured an Apache web server, hosted a webpage, and terminated the instance. 
+This experiment helped in understanding cloud computing, virtual machines, and web hosting using AWS EC2.
+
+========================================================
+IMPORTANT COMMANDS ONLY (SHORT VERSION)
+========================================================
+
+sudo yum update -y
+
+sudo yum install httpd -y
+
+sudo systemctl start httpd
+
+sudo systemctl enable httpd
+
+cd /var/www/html
+
+sudo nano index.html
+
+========================================================
+VIVA QUESTIONS (VERY IMPORTANT)
+========================================================
+
+1. What is AWS?
+   Amazon Web Services is a cloud computing platform.
+
+2. What is EC2?
+   Elastic Compute Cloud used to create virtual servers.
+
+3. What is AMI?
+   Amazon Machine Image containing operating system and software.
+
+4. What is Security Group?
+   Virtual firewall controlling traffic.
+
+5. Why is HTTP enabled?
+   To allow website access through browser.
+
+6. What is Public IP?
+   IP address used to access EC2 instance through internet.
+
+7. Why terminate instance?
+   To avoid AWS charges.
+
+========================================================
+
+IF SOME ISSUES ARRIVE:
+
+Test Again
+Open:
+http://13.206.195.105
+NOT https.
+ONLY http.
+
+
+FINAL CHECK COMMANDS
+
+Run these:
+sudo systemctl status httpd
+and
+ls /var/www/html
+You should see:
+index.html
+
+
+Restart Apache (just to be safe)
+
+Go back to terminal and run:
+sudo systemctl restart httpd
+Then check status:
+sudo systemctl status httpd
+You should see:
+active (running)
+Press:
+q
+to exit status screen.
+
+
+Step 1: Go to Security Tab
+
+In EC2 instance page:
+
+Click your instance
+Open Security tab
+Click the Security Group link
+Step 2: Edit Inbound Rules
+
+Click:
+Edit inbound rules
+Make sure you have BOTH rules:
+Type	Protocol	Port	Source
+SSH	TCP	22	Anywhere
+HTTP	TCP	80	Anywhere
+
+VERY IMPORTANT:
+Source should be:
+0.0.0.0/0
+or
+Anywhere-IPv4
+Then click:
+Save rules
+
+
+1. What is AWS?
+
+👉 AWS (Amazon Web Services) is a cloud platform that provides computing, storage, and other services over the internet.
+
+2. What is Cloud Computing?
+
+👉 Delivering computing services like servers, storage, and networking over the internet instead of local machines.
+
+3. Types of Cloud?
+
+👉 Public, Private, Hybrid
+
+4. What is EC2?
+
+👉 EC2 (Elastic Compute Cloud) provides virtual servers (instances) in the cloud.
+
+5. What is an Instance?
+
+👉 A virtual machine running in AWS.
+
+6. What is AMI?
+
+👉 Amazon Machine Image – template used to launch instances (OS + software).
+
+7. Which AMI did you use?
+
+👉 Amazon Linux 2023
+
+8. What is Instance Type?
+
+👉 Defines CPU, RAM, performance (e.g., t3.micro).
+
+9. Why t3.micro?
+
+👉 Free tier eligible, low cost, suitable for basic tasks.
+
+🔐 SECURITY & ACCESS
+10. What is Key Pair?
+
+👉 Used for secure login to EC2 instead of password.
+
+11. What are its components?
+
+👉 Public key (stored in AWS)
+👉 Private key (with user)
+
+12. What happens if private key is lost?
+
+👉 Cannot access instance.
+
+13. What is Security Group?
+
+👉 Virtual firewall controlling inbound and outbound traffic.
+
+14. What ports did you open?
+
+👉 Port 22 (SSH)
+👉 Port 80 (HTTP)
+
+15. Why port 22?
+
+👉 For SSH connection
+
+16. Why port 80?
+
+👉 To access website in browser
+
+17. What is 0.0.0.0/0?
+
+👉 Allows access from anywhere (all IPs)
+
+18. Is it secure?
+
+👉 Not for production, but okay for testing
+
+🌐 NETWORKING
+19. What is Public IP?
+
+👉 IP used to access instance from internet
+
+20. What is Private IP?
+
+👉 Used within AWS network
+
+21. What is VPC?
+
+👉 Virtual Private Cloud – isolated network in AWS
+
+22. What is Subnet?
+
+👉 Subdivision of VPC
+
+💻 PRACTICAL COMMANDS
+23. How did you connect to EC2?
+
+👉 EC2 Instance Connect (browser-based SSH)
+
+24. What is SSH?
+
+👉 Secure Shell – protocol to connect to remote machine
+
+25. Command to update system?
+sudo yum update -y
+26. Command to install Apache?
+sudo yum install httpd -y
+27. Command to start Apache?
+sudo systemctl start httpd
+28. Command to enable Apache?
+sudo systemctl enable httpd
+29. Where is website stored?
+
+👉 /var/www/html/
+
+30. File used for homepage?
+
+👉 index.html
+
+🌍 WEBSITE RELATED
+31. What is Apache?
+
+👉 Web server used to host websites
+
+32. What is httpd?
+
+👉 Apache service name in Linux
+
+33. How to check Apache status?
+sudo systemctl status httpd
+34. Why website was not opening initially?
+
+👉 Because:
+
+Apache not started OR
+Port 80 not open
+🔄 INSTANCE MANAGEMENT
+35. What is Stop vs Terminate?
+
+👉 Stop
+
+Instance stopped
+Can restart later
+
+👉 Terminate
+
+Instance deleted permanently
+36. What happens to data on terminate?
+
+👉 Lost (if not backed up)
+
+37. What is Reboot?
+
+👉 Restart instance
+
+🔥 ADVANCED (IMP for extra marks)
+38. What is SSM Session Manager?
+
+👉 Connect to EC2 without SSH key using IAM role
+
+39. Why was SSM not working?
+
+👉 IAM role not attached
+
+40. What is IAM Role?
+
+👉 Permission assigned to AWS resources
+
+41. What is EBS?
+
+👉 Elastic Block Store – storage attached to EC2
+
+42. What is Region?
+
+👉 Geographic location (e.g., Mumbai)
+
+43. What is Availability Zone?
+
+👉 Data center inside region
+
+💡 SCENARIO QUESTIONS (VERY IMPORTANT)
+44. Website not opening — what will you check?
+
+👉 Answer:
+
+Apache running?
+Port 80 open?
+Public IP correct?
+Security group rules
+45. Cannot connect to instance?
+
+👉 Answer:
+
+Port 22 open?
+Instance running?
+Correct username?
+Network issue

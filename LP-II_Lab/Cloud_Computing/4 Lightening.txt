@@ -1,0 +1,416 @@
+Step-by-Step Procedure
+========================================================
+Step 1: Create Trailhead Playground
+
+Open Salesforce Trailhead website.
+Login using Salesforce account.
+Go to:
+Profile → Hands-On Orgs → Create Playground
+Wait for Playground creation.
+Click Launch.
+
+========================================================
+Step 2: Open Salesforce Setup
+Inside Playground click the Gear Icon (⚙).
+Select:
+Setup
+
+This opens Salesforce Administration Panel.
+
+OBJECT CREATION
+========================================================
+Step 3: Open Object Manager
+In Setup search for:
+Object Manager
+Open Object Manager.
+Click:
+Create → Custom Object
+
+========================================================
+Step 4: Create Custom Object
+
+Enter the following details carefully:
+
+Field	Value
+Label	Book
+Plural Label	Books
+Object Name	Book
+Record Name	Book Name
+Data Type	Text
+
+Then click:
+
+Save
+
+This creates the custom object.
+
+CUSTOM FIELDS CREATION
+========================================================
+Step 5: Create Custom Fields
+
+Inside Book Object:
+
+Fields & Relationships → New
+
+Create the following fields one by one:
+
+Field Name	Data Type
+Author Name	Text
+Publisher	Text
+Price	Currency
+Length	Number
+Available Copies	Number
+
+For every field:
+
+Select datatype.
+Click Next.
+Enter field label.
+Click Next.
+Click Save.
+
+CUSTOM TAB CREATION
+========================================================
+Step 6: Create Custom Tab
+
+Go to:
+
+Setup → Tabs
+
+Under:
+
+Custom Object Tabs → New
+
+Steps:
+
+Select Object = Book
+Choose Tab Style
+Click Next
+Keep defaults
+Click Save
+
+This makes the Books object visible in the app menu.
+
+LIGHTNING APP CREATION
+========================================================
+Step 7: Create Lightning Application
+
+Go to:
+
+Setup → App Manager
+
+Then:
+
+Click:
+New Lightning App
+Enter:
+Field	Value
+App Name	Library Management App
+Click Next until Navigation Items page appears.
+
+========================================================
+Step 8: Add Navigation Items
+
+From Available Items select:
+
+Books
+
+Move it to Selected Items.
+
+Click:
+
+Next
+
+========================================================
+Step 9: Assign User Profiles
+
+Select:
+
+System Administrator
+
+Move it to Selected Profiles.
+
+Click:
+
+Save & Finish
+
+LAUNCH APPLICATION
+========================================================
+Step 10: Launch App
+
+Open:
+
+App Launcher
+
+Search:
+
+Library Management App
+
+Open the application successfully.
+
+CRUD OPERATIONS
+
+CREATE Operation
+========================================================
+Step 11: Create Book Records
+
+Inside Books object click:
+
+New
+Record 1
+Field	Value
+Book Name	Rich Dad Poor Dad
+Author Name	Robert Kiyosaki
+Publisher	Plata Publishing
+Price	499
+Length	336
+Available Copies	10
+
+Click:
+
+Save
+Record 2
+Field	Value
+Book Name	Atomic Habits
+Author Name	James Clear
+Publisher	Avery
+Price	599
+Length	320
+Available Copies	8
+
+Click:
+
+Save
+
+READ Operation
+========================================================
+Step 12: Read/View Records
+Open Books tab.
+View saved records successfully.
+
+This confirms cloud data storage.
+
+UPDATE Operation
+========================================================
+Step 13: Update Record
+Open any Book record.
+Click:
+Edit
+Change any value (example: Available Copies = 12).
+Click:
+Save
+
+
+DELETE Operation
+========================================================
+Step 14: Delete Record
+Open any Book record.
+Click dropdown arrow.
+Select:
+Delete
+Confirm deletion.
+
+CRUD Operations completed successfully.
+========================================================
+Output
+
+The custom Lightning Application named Library Management App was created successfully using Salesforce Cloud Platform.
+
+Custom object Book and fields like:
+
+Author Name
+Publisher
+Price
+Length
+Available Copies
+
+were created successfully.
+
+CRUD operations:
+
+Create
+Read
+Update
+Delete
+
+were performed successfully.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+🧠 Basic Questions (Very Important)
+❓1. What is Salesforce?
+
+👉 Salesforce is a cloud-based CRM platform used to build applications, manage data, and automate business processes without heavy coding.
+
+❓2. What is CRM?
+
+👉 CRM (Customer Relationship Management) is a system used to manage interactions with customers and store their data efficiently.
+
+❓3. What is cloud computing?
+
+👉 Cloud computing means storing and accessing data over the internet instead of local computers.
+
+❓4. What is Salesforce Lightning?
+
+👉 Salesforce Lightning is a modern UI framework used to build faster and more interactive applications.
+
+🧩 Object & Data Model Questions
+❓5. What is an Object in Salesforce?
+
+👉 Object is like a table in database used to store data.
+
+❓6. What is the difference between Standard and Custom Object?
+Standard Object	Custom Object
+Predefined	User-created
+Example: Account	Example: Student
+❓7. What is a Field?
+
+👉 Field is like a column that stores specific data (e.g., Age, Email).
+
+❓8. What is a Record?
+
+👉 Record is a row of data in an object.
+
+❓9. What is Object Manager?
+
+👉 It is used to create and manage objects, fields, and relationships.
+
+🧾 Field Types Questions
+❓10. What field types did you use?
+
+👉
+
+Text
+Number
+Email
+Picklist
+Phone
+❓11. What is a Picklist?
+
+👉 A picklist allows users to select a value from predefined options.
+
+❓12. Why did you use Email field type?
+
+👉 To ensure valid email format automatically.
+
+⚠️ Validation Rules (VERY IMPORTANT)
+❓13. What is a Validation Rule?
+
+👉 It is used to restrict invalid data entry.
+
+❓14. What validation rules did you implement?
+
+👉 1. Age Validation
+
+Condition: Age < 18
+Prevents underage entry
+
+👉 2. Phone Validation
+
+Only 10 digits allowed
+❓15. What is REGEX?
+
+👉 REGEX is used to match patterns in data (like phone number format).
+
+❓16. Why are validation rules important?
+
+👉 To ensure data accuracy and consistency.
+
+📱 Application & UI Questions
+❓17. What is App Manager?
+
+👉 Used to create and manage apps in Salesforce.
+
+❓18. What is a Lightning App?
+
+👉 A collection of tabs and components for a specific application.
+
+❓19. Why did you create a tab?
+
+👉 To make the object accessible in the UI.
+
+❓20. What is Navigation Item?
+
+👉 It is used to add objects/tabs into an app menu.
+
+📊 Reports & Dashboard Questions
+❓21. What is a Report?
+
+👉 Report is used to analyze and display data.
+
+❓22. What is a Dashboard?
+
+👉 Dashboard shows data in graphical format like charts.
+
+❓23. What chart did you create?
+
+👉 Bar chart / Pie chart showing student data.
+
+❓24. Difference between Report and Dashboard?
+Report	Dashboard
+Table data	Graphical view
+Detailed	Summary
+⚙️ Project-Based Questions
+❓25. What is your project?
+
+👉 Student Management System
+
+❓26. What features did you implement?
+
+👉
+
+Custom Object
+Fields
+Validation Rules
+Records
+Reports & Charts
+❓27. What problem does your project solve?
+
+👉 It helps to store, manage, and validate student data efficiently.
+
+❓28. Why Salesforce instead of coding?
+
+👉 Because it is:
+
+Faster
+No coding required
+Easy to use
+🔐 Advanced Questions (For High Marks)
+❓29. What is Field-Level Security?
+
+👉 Controls who can see or edit fields.
+
+❓30. What is Record Type?
+
+👉 Used to define different business processes.
+
+❓31. What is Workflow / Flow?
+
+👉 Used for automation in Salesforce.
+
+❓32. What is API name?
+
+👉 It is the unique system name of object/field (e.g., Age__c).
+
+❓33. Why __c is used?
+
+👉 It indicates custom field or object.
+
+⚡ Tricky Questions (Examiner Favorite)
+❓34. What happens if validation rule fails?
+
+👉 Record will not be saved and error message is shown.
+
+❓35. Can you bypass validation rules?
+
+👉 Yes, using:
+
+Admin privileges
+Logic conditions
+❓36. Difference between Required Field and Validation Rule?
+Required Field	Validation Rule
+Must fill	Condition based
+Simple	Advanced logic

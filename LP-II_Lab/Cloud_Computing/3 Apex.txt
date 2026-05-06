@@ -1,0 +1,320 @@
+🔵 1. Create Custom Object (Task)
+Setup → Object Manager → New Custom Object
+Label: Task, Plural: Tasks
+Record Name: Name (Text)
+Save
+
+🟢 2. Create Fields
+Go to Task → Fields & Relationships
+👉 Create:
+Status__c (Picklist)
+Pending
+In Progress
+Completed
+Priority__c (Picklist)
+Low
+Medium
+High
+
+🟡 3. Create Apex Class (TaskApp)
+Setup → Apex Classes → New
+Class Name: TaskApp
+👉 Write methods:
+public class TaskApp {
+
+    // CREATE
+    public static void createTask(String name){
+        Task__c t = new Task__c();
+        t.Name = name;
+        t.Status__c = 'Pending';
+        t.Priority__c = 'Medium';
+        insert t;
+        System.debug('Task Created');
+    }
+
+    // READ
+    public static void getTasks(){
+        List<Task__c> tasks = [SELECT Name, Status__c, Priority__c FROM Task__c];
+        System.debug(tasks);
+    }
+
+    // UPDATE
+    public static void completeTask(String name){
+        Task__c t = [SELECT Id, Status__c FROM Task__c WHERE Name = :name LIMIT 1];
+        t.Status__c = 'Completed';
+        update t;
+        System.debug('Task Completed');
+    }
+
+    // DELETE
+    public static void deleteTask(String name){
+        Task__c t = [SELECT Id FROM Task__c WHERE Name = :name LIMIT 1];
+        delete t;
+        System.debug('Task Deleted');
+    }
+}
+
+
+🟣 4. Execute (CRUD)
+👉 Open:
+Developer Console → Debug → Execute Anonymous
+CREATE
+TaskApp.createTask('Task 0');
+READ
+TaskApp.getTasks();
+UPDATE
+TaskApp.completeTask('Task 1');
+DELETE
+TaskApp.deleteTask('Task 1');
+
+🔴 5. Verify Records
+App Launcher → Tasks
+Check:
+Record created
+Status updated
+Record deleted
+
+⚪ 6. Logs Check
+Open Logs
+Verify:
+Task Created
+Task Completed
+Task Deleted
+
+🟠 7. Clean Up (Optional)
+Delete Apex Class → TaskApp
+Delete Object → Task
+Deleted Objects → Erase permanently
+
+🧠 BASIC CONCEPTS
+1. What is Salesforce?
+
+Answer:
+Salesforce is a cloud-based CRM (Customer Relationship Management) platform used to manage customer data, sales, services, and business processes.
+
+2. What is CRM?
+
+Answer:
+CRM stands for Customer Relationship Management. It helps businesses manage interactions with customers and improve relationships.
+
+3. What is a Custom Object?
+
+Answer:
+A custom object is a user-defined object created in Salesforce to store specific data that is not available in standard objects.
+
+👉 Example: TestTask__c
+
+4. Difference between Standard Object and Custom Object?
+Standard Object	Custom Object
+Predefined	Created by user
+Example: Account, Contact	Example: TestTask
+Cannot delete	Can delete
+5. Why does custom object have __c?
+
+Answer:
+__c indicates a custom object or field in Salesforce.
+
+💻 APEX & PROGRAMMING
+6. What is Apex?
+
+Answer:
+Apex is a strongly typed, object-oriented programming language used in Salesforce to write business logic.
+
+7. Why do we use Apex?
+
+Answer:
+To perform operations like:
+
+Data manipulation
+Automation
+Complex business logic
+8. What is an Apex Class?
+
+Answer:
+An Apex class is a blueprint that contains variables and methods to perform operations.
+
+9. What are methods in Apex?
+
+Answer:
+Methods are functions inside a class used to perform specific tasks.
+
+10. What does public static void mean?
+public static void createTask(String name)
+
+Answer:
+
+public → accessible everywhere
+static → can be called without object
+void → no return value
+🔁 CRUD OPERATIONS
+11. What is CRUD?
+
+Answer:
+CRUD stands for:
+
+C → Create
+R → Read
+U → Update
+D → Delete
+12. How did you perform CREATE?
+insert t;
+
+Answer:
+We create a new record using insert keyword.
+
+13. How did you perform READ?
+SELECT Name FROM TestTask__c
+
+Answer:
+We use SOQL (Salesforce Object Query Language) to retrieve records.
+
+14. What is SOQL?
+
+Answer:
+SOQL is used to fetch data from Salesforce objects (similar to SQL but only SELECT).
+
+15. How did you perform UPDATE?
+update t;
+
+Answer:
+We modify existing records and use update.
+
+16. How did you perform DELETE?
+delete t;
+
+Answer:
+We remove records using delete.
+
+🧾 CODE-RELATED QUESTIONS
+17. What is this line doing?
+TestTask__c t = new TestTask__c();
+
+Answer:
+It creates a new object (record instance) of TestTask.
+
+18. What is t.Name = name;?
+
+Answer:
+Assigns value to the Name field.
+
+19. What is System.debug()?
+
+Answer:
+Used to print output in logs for debugging.
+
+20. What is LIMIT 1?
+SELECT Id FROM TestTask__c LIMIT 1
+
+Answer:
+It restricts query to return only one record.
+
+21. Why use WHERE Name = :name?
+
+Answer:
+To filter records dynamically using variable binding.
+
+22. What is variable binding (:name)?
+
+Answer:
+Passing Apex variable into SOQL query.
+
+🧩 FIELDS & OBJECT
+23. What fields did you create?
+
+Answer:
+
+Name (Text)
+Status (Picklist)
+Priority (Picklist)
+24. What is Picklist?
+
+Answer:
+A field that allows selecting predefined values.
+
+25. Why use Picklist?
+
+Answer:
+To maintain data consistency and avoid invalid input.
+
+🧪 EXECUTION
+26. How did you run the code?
+
+Answer:
+Using Execute Anonymous Window in Developer Console.
+
+27. What is Execute Anonymous?
+
+Answer:
+A feature to run Apex code without creating a class.
+
+28. Where do you see output?
+
+Answer:
+In Logs → Debug Logs
+
+⚠️ ERROR & DEBUGGING
+29. What if no record is found in update/delete?
+
+Answer:
+It will throw a QueryException.
+
+30. How to avoid that?
+
+Answer:
+Use:
+
+List<TestTask__c> tasks = [SELECT Id FROM TestTask__c WHERE Name = :name];
+if(!tasks.isEmpty()){
+    delete tasks[0];
+}
+🔐 SECURITY & GOVERNOR LIMITS
+31. What are Governor Limits?
+
+Answer:
+Limits enforced by Salesforce to control resource usage.
+
+32. Example of limits:
+SOQL queries limit = 100
+DML operations limit = 150
+🔄 REAL-TIME QUESTIONS
+33. Difference between SOQL and SQL?
+SOQL	SQL
+Only SELECT	SELECT, INSERT, UPDATE
+Salesforce only	General DB
+34. Can we use JOIN in SOQL?
+
+Answer:
+No direct joins, but relationships are used.
+
+35. What is DML?
+
+Answer:
+Data Manipulation Language → insert, update, delete
+
+🎯 SCENARIO QUESTIONS
+36. What happens when you delete object?
+
+Answer:
+
+Goes to recycle bin
+Can be permanently deleted
+37. Can you recover deleted object?
+
+Answer:
+Yes (within 15 days)
+
+38. Why did you create separate class?
+
+Answer:
+To maintain modularity and avoid conflicts with existing code.
+
+🧠 FINAL SMART QUESTIONS (HIGH CHANCE)
+39. Why static methods?
+
+Answer:
+So we can call them directly without creating object.
+
+40. Why use LIMIT 1 in update/delete?
+
+Answer:
+To avoid multiple record updates accidentally.
