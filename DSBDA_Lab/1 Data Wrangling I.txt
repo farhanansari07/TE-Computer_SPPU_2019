@@ -1,0 +1,355 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("diabetes.csv")
+
+df.head()
+
+df.shape
+
+df.columns
+
+df.dtypes
+
+df.isnull().sum()
+
+df.describe()
+
+cols = ['Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI']
+df[cols] = df[cols].replace(0, np.nan)
+
+df.isnull().sum()
+
+df.fillna(df.mean(), inplace=True)
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+df_scaled = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
+
+df['Outcome'] = df['Outcome'].astype('category')
+
+df['Outcome'] = df['Outcome'].cat.codes
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+📘 SMALL THEORY (Data Wrangling)
+
+Data wrangling (or data preprocessing) is the process of cleaning, transforming, and organizing raw data into a structured format suitable for analysis and machine learning. Real-world datasets often contain missing values, incorrect entries, and inconsistent formats, which can negatively affect results.
+
+In this practical, the diabetes dataset is used. The dataset is first loaded into a pandas DataFrame. Initial exploration is done using functions like head(), shape, columns, and describe() to understand structure and statistics.
+
+Missing values are identified using isnull(). Since some medical values (like Glucose, BMI) cannot be zero, such invalid values are replaced with NaN. These missing values are then handled using mean imputation.
+
+Further, data normalization is applied using MinMaxScaler to bring all features to a common scale (0 to 1), which improves model performance. Finally, categorical variables like “Outcome” are converted into numeric form for machine learning compatibility.
+
+✅ ADVANTAGES
+Improves data quality and accuracy
+Handles missing and inconsistent values effectively
+Makes data suitable for machine learning models
+Normalization ensures fair comparison between features
+Reduces errors during analysis
+❌ DISADVANTAGES
+Time-consuming for large datasets
+Mean imputation may reduce data variability
+Improper handling can introduce bias
+Requires domain knowledge (e.g., knowing 0 is invalid)
+Over-processing may remove important information
+🎯 CONCLUSION
+
+In this practical, data wrangling techniques were successfully applied to the diabetes dataset. The dataset was cleaned by handling missing and invalid values, and transformed using normalization and type conversion. These steps improved the quality and usability of the data, making it ready for further analysis and machine learning tasks. Proper data preprocessing is essential for obtaining accurate and reliable results.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+🔹 BASIC QUESTIONS
+1. What is Data Wrangling?
+
+Answer:
+Data wrangling is the process of cleaning, transforming, and organizing raw data into a structured format suitable for analysis.
+
+2. Why is data wrangling important?
+
+Answer:
+Because raw data is often incomplete, inconsistent, or noisy. Wrangling improves data quality and accuracy for analysis or machine learning.
+
+3. Which dataset did you use?
+
+Answer:
+Diabetes dataset (commonly from Kaggle), used for predicting whether a patient has diabetes.
+
+4. What is a DataFrame?
+
+Answer:
+A DataFrame is a 2D tabular data structure in pandas with rows and columns.
+
+5. Difference between Series and DataFrame?
+
+Answer:
+
+Series → 1D data
+DataFrame → 2D data (table)
+🔹 PYTHON & PANDAS QUESTIONS
+6. What does pd.read_csv() do?
+
+Answer:
+It loads a CSV file into a pandas DataFrame.
+
+7. What is the use of df.head()?
+
+Answer:
+Displays the first 5 rows of the dataset.
+
+8. What does df.shape return?
+
+Answer:
+Returns number of rows and columns → (rows, columns)
+
+9. What is df.columns?
+
+Answer:
+It lists all column names in the dataset.
+
+10. What is df.dtypes?
+
+Answer:
+Shows the data type of each column (int, float, object, etc.)
+
+🔹 DATA PREPROCESSING QUESTIONS
+11. What are missing values?
+
+Answer:
+Values that are not present in the dataset, represented as NaN.
+
+12. How did you check missing values?
+
+Answer:
+Using:
+
+df.isnull().sum()
+13. Why were zeros replaced with NaN?
+
+Answer:
+Because values like Glucose, BMI cannot be zero realistically, so they are treated as missing values.
+
+14. What is np.nan?
+
+Answer:
+It represents missing or undefined numerical data.
+
+15. How did you handle missing values?
+
+Answer:
+Using mean imputation:
+
+df.fillna(df.mean(), inplace=True)
+16. Why did you use mean instead of median or mode?
+
+Answer:
+Mean is simple and works well when data is normally distributed.
+
+17. What is data cleaning?
+
+Answer:
+Process of removing errors, duplicates, and inconsistencies from data.
+
+🔹 STATISTICS QUESTIONS
+18. What does df.describe() show?
+
+Answer:
+It shows statistical summary:
+
+mean
+std
+min
+max
+percentiles
+19. What is standard deviation?
+
+Answer:
+It measures how much data varies from the mean.
+
+20. What is mean?
+
+Answer:
+Average value of the data.
+
+🔹 DATA TYPES & CONVERSION
+21. What are types of data?
+
+Answer:
+
+Numeric (int, float)
+Categorical
+Boolean
+22. What is type conversion?
+
+Answer:
+Changing one data type into another.
+
+23. Why convert categorical data to numeric?
+
+Answer:
+Because machine learning models require numeric input.
+
+24. How did you convert categorical data?
+
+Answer:
+
+df['Outcome'] = df['Outcome'].astype('category')
+df['Outcome'] = df['Outcome'].cat.codes
+🔹 NORMALIZATION QUESTIONS
+25. What is normalization?
+
+Answer:
+Scaling data to a fixed range (usually 0 to 1).
+
+26. Why is normalization needed?
+
+Answer:
+To ensure all features contribute equally and improve model performance.
+
+27. Which method did you use?
+
+Answer:
+Min-Max Scaling
+
+28. What is MinMaxScaler?
+
+Answer:
+A method that transforms data into range [0,1].
+
+29. Formula of normalization:
+
+X
+′
+=
+X
+max
+	​
+
+−X
+min
+	​
+
+X−X
+min​
+
+	
+30. Difference between normalization and standardization?
+
+Answer:
+
+Normalization → range [0,1]
+Standardization → mean = 0, std = 1
+🔹 ADVANCED QUESTIONS
+31. What is feature scaling?
+
+Answer:
+Adjusting values of features to a similar scale.
+
+32. What is outlier?
+
+Answer:
+A data point that is very different from others.
+
+33. How can you detect outliers?
+
+Answer:
+
+Boxplot
+Z-score
+IQR method
+34. What is overfitting?
+
+Answer:
+Model performs well on training data but poorly on new data.
+
+35. What is data preprocessing?
+
+Answer:
+Steps applied to raw data before analysis or modeling.
+
+🔹 PRACTICAL-SPECIFIC QUESTIONS
+36. What is the shape of your dataset?
+
+Answer:
+768 rows and 9 columns.
+
+37. Name some columns in dataset.
+
+Answer:
+Pregnancies, Glucose, BloodPressure, BMI, Age, Outcome.
+
+38. Which column is target variable?
+
+Answer:
+Outcome
+
+39. What does Outcome represent?
+
+Answer:
+
+0 → No Diabetes
+1 → Diabetes
+40. Why is Insulin having many missing values?
+
+Answer:
+Because many readings were recorded as 0, which is invalid and replaced as missing.
+
+🔹 CODING QUESTIONS
+41. Difference between loc and iloc?
+
+Answer:
+
+loc → label-based
+iloc → index-based
+42. What is inplace=True?
+
+Answer:
+It modifies the original dataset directly.
+
+43. What is chaining?
+
+Answer:
+Applying multiple operations in one line.
+
+44. What is sklearn?
+
+Answer:
+A Python library for machine learning.
+
+🔹 CONCEPTUAL QUESTIONS
+45. What happens if missing values are not handled?
+
+Answer:
+Model accuracy decreases and errors may occur.
+
+46. What is data inconsistency?
+
+Answer:
+When data contains errors or conflicting values.
+
+47. What is structured data?
+
+Answer:
+Data organized in rows and columns.
+
+48. What is unstructured data?
+
+Answer:
+Data without predefined format (text, images).
+
+49. What is ETL?
+
+Answer:
+
+Extract
+Transform
+Load
+50. What is real-life application of this dataset?
+
+Answer:
+Used in healthcare to predict diabetes risk.
