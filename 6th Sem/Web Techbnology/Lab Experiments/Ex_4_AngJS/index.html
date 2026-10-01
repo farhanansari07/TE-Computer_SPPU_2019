@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rhythmix — Music Player</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     SIDEBAR
+============================================================ -->
+<div class="app-shell d-flex">
+  <aside class="sidebar d-flex flex-column p-3">
+    <div class="brand mb-4">
+      <i class="bi bi-soundwave"></i>
+      <span>Rhythmix</span>
+    </div>
+
+    <nav class="nav-links flex-grow-1">
+      <a href="#" class="nav-item active" data-section="home">
+        <i class="bi bi-house-fill"></i> Home
+      </a>
+      <a href="#" class="nav-item" data-section="search">
+        <i class="bi bi-search"></i> Search
+      </a>
+      <a href="#" class="nav-item" data-section="library">
+        <i class="bi bi-collection-fill"></i> Library
+      </a>
+      <a href="#" class="nav-item" data-section="liked">
+        <i class="bi bi-heart-fill"></i> Liked Songs
+      </a>
+    </nav>
+
+    <!-- Playlists panel -->
+    <div class="playlist-panel mt-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="label-sm">PLAYLISTS</span>
+        <button class="btn-icon" id="btnCreatePlaylist" title="New playlist">
+          <i class="bi bi-plus-lg"></i>
+        </button>
+      </div>
+      <ul id="playlistList" class="playlist-list"></ul>
+    </div>
+
+    <!-- User profile -->
+    <div class="user-profile mt-3" id="userProfile">
+      <div class="avatar" id="userAvatar">?</div>
+      <div class="user-info" id="userInfoBlock">
+        <div class="user-name" id="displayUserName">Guest</div>
+        <div class="user-sub">Free plan</div>
+      </div>
+      <button class="btn-icon ms-auto" id="btnLogout" title="Logout" style="display:none">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
+
+<!-- ============================================================
+     MAIN CONTENT
+============================================================ -->
+  <main class="main-content flex-grow-1 d-flex flex-column">
+
+    <!-- TOP BAR -->
+    <header class="topbar d-flex align-items-center gap-3 px-4 py-3">
+      <div class="search-box flex-grow-1" id="searchSection" style="display:none">
+        <i class="bi bi-search"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search songs, artists…" />
+      </div>
+      <div class="ms-auto d-flex gap-2">
+        <button class="btn-pill" id="btnLogin"><i class="bi bi-person-fill"></i> Log In</button>
+        <button class="btn-pill btn-primary-accent" id="btnSignUp"><i class="bi bi-person-plus-fill"></i> Sign Up</button>
+      </div>
+    </header>
+
+    <!-- SCROLL AREA -->
+    <div class="scroll-area flex-grow-1 px-4 py-3" id="scrollArea">
+
+      <!-- ====== HOME SECTION ====== -->
+      <section id="section-home" class="content-section active">
+        <h2 class="section-title">Good evening 👋</h2>
+
+        <!-- Quick picks grid -->
+        <div class="quick-grid mb-5" id="quickGrid"></div>
+
+        <h3 class="sub-title">Featured Albums</h3>
+        <div class="cards-row" id="featuredRow"></div>
+
+        <h3 class="sub-title mt-4">Trending Now</h3>
+        <div class="cards-row" id="trendingRow"></div>
+      </section>
+
+      <!-- ====== SEARCH SECTION ====== -->
+      <section id="section-search" class="content-section">
+        <h2 class="section-title">Browse All</h2>
+        <div class="genre-grid" id="genreGrid"></div>
+        <div class="search-results mt-4" id="searchResults"></div>
+      </section>
+
+      <!-- ====== LIBRARY SECTION ====== -->
+      <section id="section-library" class="content-section">
+        <h2 class="section-title">Your Library</h2>
+        <div id="libraryContent"></div>
+      </section>
+
+      <!-- ====== LIKED SECTION ====== -->
+      <section id="section-liked" class="content-section">
+        <div class="liked-hero">
+          <div class="liked-icon"><i class="bi bi-heart-fill"></i></div>
+          <div>
+            <p class="label-sm mb-1">PLAYLIST</p>
+            <h2 class="section-title mb-0">Liked Songs</h2>
+            <p class="text-muted" id="likedCount">0 songs</p>
+          </div>
+        </div>
+        <div id="likedList" class="track-list mt-3"></div>
+      </section>
+
+    </div><!-- /scroll-area -->
+
+<!-- ============================================================
+     NOW PLAYING BAR (bottom)
+============================================================ -->
+    <footer class="player-bar d-flex align-items-center gap-3 px-4">
+
+      <!-- Track info -->
+      <div class="track-info d-flex align-items-center gap-3" style="width:280px">
+        <div class="track-thumb" id="playerThumb">♪</div>
+        <div class="track-meta">
+          <div class="track-name" id="playerTrackName">No track selected</div>
+          <div class="track-artist" id="playerArtistName">—</div>
+        </div>
+        <button class="btn-icon like-btn" id="playerLikeBtn" title="Like">
+          <i class="bi bi-heart"></i>
+        </button>
+      </div>
+
+      <!-- Controls -->
+      <div class="player-controls flex-grow-1 d-flex flex-column align-items-center gap-1">
+        <div class="ctrl-buttons d-flex align-items-center gap-3">
+          <button class="btn-icon ctrl" id="btnShuffle" title="Shuffle"><i class="bi bi-shuffle"></i></button>
+          <button class="btn-icon ctrl" id="btnPrev" title="Previous"><i class="bi bi-skip-start-fill"></i></button>
+          <button class="btn-icon play-btn" id="btnPlayPause" title="Play/Pause"><i class="bi bi-play-fill"></i></button>
+          <button class="btn-icon ctrl" id="btnNext" title="Next"><i class="bi bi-skip-end-fill"></i></button>
+          <button class="btn-icon ctrl" id="btnRepeat" title="Repeat"><i class="bi bi-repeat"></i></button>
+        </div>
+        <div class="progress-row d-flex align-items-center gap-2 w-100">
+          <span class="time-label" id="currentTime">0:00</span>
+          <div class="progress-bar-wrap flex-grow-1" id="progressBarWrap">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+          <span class="time-label" id="totalTime">0:00</span>
+        </div>
+      </div>
+
+      <!-- Volume -->
+      <div class="volume-controls d-flex align-items-center gap-2" style="width:180px; justify-content:flex-end">
+        <button class="btn-icon ctrl" id="btnMute" title="Mute"><i class="bi bi-volume-up-fill"></i></button>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" />
+      </div>
+    </footer>
+
+  </main>
+</div><!-- /app-shell -->
+
+<!-- ============================================================
+     MODALS
+============================================================ -->
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content glass-modal">
+      <div class="modal-header border-0">
+        <h5 class="modal-title"><i class="bi bi-soundwave me-2"></i>Log In to Rhythmix</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control dark-input" id="loginEmail" placeholder="you@example.com" required />
+            <div class="invalid-feedback" id="loginEmailErr"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <input type="password" class="form-control dark-input" id="loginPassword" placeholder="••••••••" required />
+              <button class="btn dark-input border-0 px-3" type="button" id="toggleLoginPwd">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback" id="loginPwdErr"></div>
+          </div>
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-accent">Log In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content glass-modal">
+      <div class="modal-header border-0">
+        <h5 class="modal-title"><i class="bi bi-person-plus-fill me-2"></i>Create Account</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="signupForm" novalidate>
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-control dark-input" id="signupName" placeholder="John Doe" required />
+            <div class="invalid-feedback" id="signupNameErr"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control dark-input" id="signupEmail" placeholder="you@example.com" required />
+            <div class="invalid-feedback" id="signupEmailErr"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <div class="input-group">
+              <input type="password" class="form-control dark-input" id="signupPassword" placeholder="Min 8 characters" required />
+              <button class="btn dark-input border-0 px-3" type="button" id="toggleSignupPwd">
+                <i class="bi bi-eye"></i>
+              </button>
+            </div>
+            <div class="invalid-feedback" id="signupPwdErr"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" class="form-control dark-input" id="signupConfirm" placeholder="Re-enter password" required />
+            <div class="invalid-feedback" id="signupConfirmErr"></div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="agreeTerms" required />
+            <label class="form-check-label" for="agreeTerms">I agree to the <a href="#" class="accent-link">Terms of Service</a></label>
+            <div class="invalid-feedback" id="signupTermsErr"></div>
+          </div>
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-accent">Create Account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- App JS -->
+<script src="main.js"></script>
+</body>
+</html>

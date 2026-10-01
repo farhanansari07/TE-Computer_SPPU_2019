@@ -1,0 +1,582 @@
+/* ============================================================
+   RHYTHMIX — MUSIC APP CSS
+   Author : Assignment Project
+   Stack  : Bootstrap 5 + Custom CSS
+============================================================ */
+
+/* ---------- Google Fonts imported in HTML ---------- */
+/* Syne (display) + Space Mono (mono accent) */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --bg-base:       #0a0a0a;
+  --bg-surface:    #111111;
+  --bg-elevated:   #1a1a1a;
+  --bg-card:       #1e1e1e;
+  --border:        rgba(255,255,255,0.06);
+  --accent:        #e8f54e;       /* neon lime */
+  --accent-hover:  #d4e03a;
+  --accent-dark:   #3a3d0e;
+  --text-primary:  #f0f0f0;  
+  --text-secondary: #a0a0a0;
+  --text-muted:    #555;
+  --sidebar-w:     240px;
+  --player-h:      88px;
+  --radius:        10px;
+  --radius-lg:     16px;
+  --font-display:  'Syne', sans-serif;
+  --font-mono:     'Space Mono', monospace;
+  --transition:    0.2s ease;
+
+  /* Genre colours */
+  --g1: #7c3aed; --g2: #db2777; --g3: #0891b2;
+  --g4: #d97706; --g5: #059669; --g6: #dc2626;
+}
+  
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 14px;
+  overflow: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; padding: 0; margin: 0; }
+button { cursor: pointer; border: none; background: none; color: inherit; font-family: inherit; }
+input, select { font-family: inherit; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg-elevated); border-radius: 4px; }
+
+/* ============================================================
+   APP SHELL LAYOUT
+============================================================ */
+.app-shell {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: #000;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+.brand i { font-size: 1.6rem; }
+
+.nav-links { display: flex; flex-direction: column; gap: 4px; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  transition: all var(--transition);
+}
+.nav-item:hover { color: var(--text-primary); background: var(--bg-elevated); }
+.nav-item.active { color: var(--text-primary); }
+.nav-item.active i { color: var(--accent); }
+
+.label-sm {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.playlist-list { display: flex; flex-direction: column; gap: 4px; }
+.playlist-item {
+  padding: 7px 10px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.playlist-item:hover { color: var(--text-primary); background: var(--bg-elevated); }
+
+/* User Profile Strip */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  cursor: default;
+}
+.avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--accent-dark);
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem;
+}
+.user-name { font-weight: 700; font-size: 0.82rem; }
+.user-sub  { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ============================================================
+   MAIN CONTENT
+============================================================ */
+.main-content {
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+/* Topbar */
+.topbar {
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  min-height: 60px;
+  z-index: 10;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 18px;
+  max-width: 480px;
+}
+.search-box i { color: var(--text-muted); }
+.search-input {
+  background: none; border: none; outline: none;
+  color: var(--text-primary); width: 100%; font-size: 0.9rem;
+}
+.search-input::placeholder { color: var(--text-muted); }
+
+.btn-pill {
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.82rem;
+  font-family: var(--font-display);
+  transition: all var(--transition);
+}
+.btn-pill:hover { background: var(--bg-card); border-color: var(--text-muted); }
+.btn-pill.btn-primary-accent {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+}
+.btn-pill.btn-primary-accent:hover { background: var(--accent-hover); }
+
+/* Scroll area */
+.scroll-area {
+  overflow-y: auto;
+  height: calc(100vh - 60px - var(--player-h));
+}
+
+/* Content sections */
+.content-section { display: none; }
+.content-section.active { display: block; }
+
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+.sub-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  margin-bottom: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   HOME — QUICK GRID
+============================================================ */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+.quick-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 1px solid var(--border);
+}
+.quick-card:hover {
+  background: var(--bg-card);
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.12);
+}
+.quick-card:hover .play-overlay { opacity: 1; transform: scale(1); }
+.quick-thumb {
+  width: 56px; height: 56px;
+  font-size: 1.6rem;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-card);
+  flex-shrink: 0;
+  position: relative;
+}
+.quick-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================
+   CARDS ROW (Albums/Trending)
+============================================================ */
+.cards-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.cards-row::-webkit-scrollbar { height: 3px; }
+
+.album-card {
+  flex-shrink: 0;
+  width: 160px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius);
+  padding: 14px;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: 1px solid var(--border);
+}
+.album-card:hover {
+  background: var(--bg-card);
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.12);
+}
+.album-thumb {
+  width: 100%; aspect-ratio: 1;
+  border-radius: 8px;
+  font-size: 3rem;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-card);
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.album-thumb::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent);
+}
+.album-title   { font-weight: 700; font-size: 0.82rem; margin-bottom: 3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.album-artist  { font-size: 0.72rem; color: var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* Play overlay on hover */
+.play-overlay {
+  position: absolute;
+  bottom: 8px; right: 8px;
+  width: 36px; height: 36px;
+  background: var(--accent);
+  color: #000;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+.album-card:hover .play-overlay { opacity: 1; transform: scale(1); }
+
+/* ============================================================
+   GENRE GRID
+============================================================ */
+.genre-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.genre-card {
+  padding: 20px 16px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition);
+}
+.genre-card:hover { transform: scale(1.04); }
+.genre-card::after {
+  content: attr(data-emoji);
+  position: absolute;
+  bottom: -4px; right: 6px;
+  font-size: 2.8rem;
+  opacity: 0.7;
+  transform: rotate(12deg);
+}
+
+/* ============================================================
+   TRACK LIST
+============================================================ */
+.track-list { display: flex; flex-direction: column; gap: 2px; }
+.track-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 140px 60px 50px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.track-row:hover { background: var(--bg-elevated); }
+.track-row.playing { background: var(--accent-dark); }
+.track-row.playing .tr-name { color: var(--accent); }
+.tr-num { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.8rem; text-align: center; }
+.tr-info { overflow: hidden; }
+.tr-name   { font-weight: 600; font-size: 0.85rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tr-artist { font-size: 0.75rem; color: var(--text-secondary); }
+.tr-album  { font-size: 0.78rem; color: var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tr-dur    { font-size: 0.78rem; color: var(--text-muted); font-family: var(--font-mono); text-align: right; }
+.tr-actions { display: flex; gap: 4px; justify-content: flex-end; }
+
+/* Header row */
+.track-header {
+  display: grid;
+  grid-template-columns: 40px 1fr 140px 60px 50px;
+  gap: 12px;
+  padding: 6px 12px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: var(--font-mono);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   LIKED HERO
+============================================================ */
+.liked-hero {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: linear-gradient(135deg, #1a1a40 0%, var(--bg-base) 100%);
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px;
+}
+.liked-icon {
+  width: 80px; height: 80px;
+  background: linear-gradient(135deg, #4f4fff, #7b2ff7);
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   PLAYER BAR
+============================================================ */
+.player-bar {
+  height: var(--player-h);
+  background: #050505;
+  border-top: 1px solid var(--border);
+  z-index: 20;
+}
+
+.track-thumb {
+  width: 52px; height: 52px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.track-name   { font-weight: 700; font-size: 0.85rem; white-space:nowrap; max-width:140px; overflow:hidden; text-overflow:ellipsis; }
+.track-artist { font-size: 0.75rem; color: var(--text-secondary); }
+
+/* Play button */
+.play-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #000;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+  transition: transform var(--transition);
+}
+.play-btn:hover { transform: scale(1.06); background: var(--accent-hover); }
+
+/* Control buttons */
+.btn-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  transition: all var(--transition);
+}
+.btn-icon:hover { color: var(--text-primary); }
+.btn-icon.active { color: var(--accent); }
+
+/* Progress */
+.time-label { font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); min-width: 36px; }
+
+.progress-bar-wrap {
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  transition: height var(--transition);
+}
+.progress-bar-wrap:hover { height: 6px; }
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.5s linear;
+  pointer-events: none;
+}
+
+/* Volume */
+.volume-slider {
+  width: 90px;
+  height: 4px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  border-radius: 999px;
+}
+
+/* ============================================================
+   MODALS
+============================================================ */
+.glass-modal {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+}
+.glass-modal .modal-title { font-weight: 800; font-size: 1.05rem; }
+
+.dark-input {
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px !important;
+}
+.dark-input:focus {
+  background: var(--bg-elevated) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(232,245,78,0.15) !important;
+  color: var(--text-primary) !important;
+}
+.dark-input::placeholder { color: var(--text-muted) !important; }
+
+.btn-accent {
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  font-family: var(--font-display);
+  border-radius: 999px;
+  padding: 10px;
+  transition: background var(--transition);
+}
+.btn-accent:hover { background: var(--accent-hover); color: #000; }
+
+.accent-link { color: var(--accent); }
+.accent-link:hover { text-decoration: underline; }
+
+.form-check-input:checked {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+.toast-container {
+  position: fixed;
+  bottom: calc(var(--player-h) + 16px);
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast-msg {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  animation: slideIn 0.25s ease;
+  pointer-events: none;
+}
+.toast-msg.accent { border-left: 3px solid var(--accent); }
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ============================================================
+   LIBRARY / SEARCH RESULTS
+============================================================ */
+.search-results .track-list { margin-top: 8px; }
+
+/* ============================================================
+   RESPONSIVE TWEAKS
+============================================================ */
+@media (max-width: 768px) {
+  .sidebar { width: 60px; min-width: 60px; }
+  .brand span, .nav-item span, .user-info, .playlist-panel { display: none; }
+  .nav-item { justify-content: center; padding: 10px; }
+  .track-row { grid-template-columns: 40px 1fr 60px 40px; }
+  .tr-album  { display: none; }
+}
